@@ -14,13 +14,13 @@
 		"lint": "biome lint --write .",
 		"check": "biome check --write .",
 		"prepare": "husky",
-    "commit": "cz"
+		"commit": "cz"
 	},
 	"jest": {
 		"preset": "jest-expo"
 	},
 	"lint-staged": {
-		"**.js|ts|cjs|mjs|d.cts|d.mts|jsx|tsx|json|jsonc": [
+		"*.{js,ts,cjs,mjs,tsx,json}": [
 			"biome check --files-ignore-unknown=true",
 			"biome check --write --no-errors-on-unmatched",
 			"biome check --write --organize-imports-enabled=false --no-errors-on-unmatched",
