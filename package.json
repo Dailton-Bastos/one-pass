@@ -18,16 +18,16 @@
 	"jest": {
 		"preset": "jest-expo"
 	},
-  "lint-staged": {
-    "**.{js|ts|cjs|mjs|d.cts|d.mts|jsx|tsx|json|jsonc}": [
-      "biome check --files-ignore-unknown=true",
-      "biome check --write --no-errors-on-unmatched",
-      "biome check --write --organize-imports-enabled=false --no-errors-on-unmatched",
-      "biome check --write --unsafe --no-errors-on-unmatched",
-      "biome format --write --no-errors-on-unmatched",
-      "biome lint --write --no-errors-on-unmatched"
-    ]
-  },
+	"lint-staged": {
+		"**.{js|ts|cjs|mjs|d.cts|d.mts|jsx|tsx|json|jsonc}": [
+			"biome check --files-ignore-unknown=true",
+			"biome check --write --no-errors-on-unmatched",
+			"biome check --write --organize-imports-enabled=false --no-errors-on-unmatched",
+			"biome check --write --unsafe --no-errors-on-unmatched",
+			"biome format --write --no-errors-on-unmatched",
+			"biome lint --write --no-errors-on-unmatched"
+		]
+	},
 	"dependencies": {
 		"@expo/vector-icons": "^14.0.2",
 		"@react-navigation/native": "^6.0.2",
@@ -52,6 +52,8 @@
 	"devDependencies": {
 		"@babel/core": "^7.20.0",
 		"@biomejs/biome": "1.9.3",
+		"@commitlint/cli": "^19.5.0",
+		"@commitlint/config-conventional": "^19.5.0",
 		"@types/jest": "^29.5.12",
 		"@types/react": "~18.2.45",
 		"@types/react-test-renderer": "^18.0.7",
