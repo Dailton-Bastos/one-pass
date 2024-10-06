@@ -5,9 +5,9 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
-				SfProText: ['SfPro', 'sans-serif'],
-				SfProTextMedium: ['SfPro-Medium', 'sans-serif'],
-				SfProTextBold: ['SfPro-Bold', 'sans-serif'],
+				SFProText: ['SFProText', 'sans-serif'],
+				SFProTextMedium: ['SFProText-Medium', 'sans-serif'],
+				SFProTextBold: ['SFProText-Bold', 'sans-serif'],
 			},
 			colors: {
 				default: '#FF6464',

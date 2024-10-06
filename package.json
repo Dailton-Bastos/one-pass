@@ -21,11 +21,11 @@
 	},
 	"lint-staged": {
 		"*.{js,ts,cjs,mjs,tsx,json}": [
+			"biome format --write --no-errors-on-unmatched",
 			"biome check --files-ignore-unknown=true",
 			"biome check --write --no-errors-on-unmatched",
 			"biome check --write --organize-imports-enabled=false --no-errors-on-unmatched",
 			"biome check --write --unsafe --no-errors-on-unmatched",
-			"biome format --write --no-errors-on-unmatched",
 			"biome lint --write --no-errors-on-unmatched"
 		]
 	},
@@ -34,7 +34,7 @@
 		"@react-navigation/native": "^6.0.2",
 		"expo": "~51.0.28",
 		"expo-constants": "~16.0.2",
-		"expo-font": "^12.0.10",
+		"expo-font": "~12.0.10",
 		"expo-linking": "~6.3.1",
 		"expo-router": "~3.5.23",
 		"expo-splash-screen": "~0.27.5",
