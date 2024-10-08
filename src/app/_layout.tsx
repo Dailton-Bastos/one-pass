@@ -12,6 +12,7 @@ export default function RootLayout() {
 		SFProText: require('../assets/fonts/SFProText-Regular.otf'),
 		'SFProText-Medium': require('../assets/fonts/SFProText-Medium.otf'),
 		'SFProText-Bold': require('../assets/fonts/SFProText-Bold.otf'),
+		BebasNeue: require('../assets/fonts/BebasNeue-Regular.otf'),
 	})
 
 	useEffect(() => {
@@ -27,6 +28,7 @@ export default function RootLayout() {
 	return (
 		<Stack>
 			<Stack.Screen name="index" options={{ headerShown: false }} />
+			<Stack.Screen name="(auth)" options={{ headerShown: false }} />
 			<Stack.Screen name="+not-found" />
 		</Stack>
 	)

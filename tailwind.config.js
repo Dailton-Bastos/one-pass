@@ -8,6 +8,7 @@ module.exports = {
 				SFProText: ['SFProText', 'sans-serif'],
 				SFProTextMedium: ['SFProText-Medium', 'sans-serif'],
 				SFProTextBold: ['SFProText-Bold', 'sans-serif'],
+				BebasNeue: ['BebasNeue', 'sans-serif'],
 			},
 			colors: {
 				default: '#FF6464',
