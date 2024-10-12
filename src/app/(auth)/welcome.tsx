@@ -1,11 +1,17 @@
 import { Button } from '@/components/shared/Button'
 import { Logo } from '@/components/shared/Logo'
 import { onboarding } from '@/constants'
+import { router } from 'expo-router'
+import React from 'react'
 import { Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Swiper from 'react-native-swiper'
 
 const Welcome = () => {
+	const handleGoToSignUp = React.useCallback(() => {
+		router.replace('/(auth)/sign-up')
+	}, [])
+
 	const renderPagination = (index: number, total: number) => {
 		const itemsArray = Array.from({ length: total }, (_, index) => index + 1)
 
@@ -59,7 +65,12 @@ const Welcome = () => {
 			</View>
 
 			<View className="w-full flex flex-row gap-x-4">
-				<Button title="Register" variant="outline" className="flex-1" />
+				<Button
+					title="Register"
+					variant="outline"
+					className="flex-1"
+					onPress={handleGoToSignUp}
+				/>
 				<Button title="Login" variant="primary" className="flex-1" />
 			</View>
 		</SafeAreaView>
