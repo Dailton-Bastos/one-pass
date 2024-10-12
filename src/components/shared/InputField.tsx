@@ -1,4 +1,5 @@
 import type { InputProps } from '@/types'
+import { forwardRef } from 'react'
 import {
 	KeyboardAvoidingView,
 	Platform,
@@ -8,14 +9,8 @@ import {
 } from 'react-native'
 import { twMerge } from 'tailwind-merge'
 
-export const InputField = (props: InputProps) => {
-	const {
-		label,
-		secureTextEntry = false,
-		error = false,
-		errorMessage,
-		...rest
-	} = props
+export const InputField = forwardRef<TextInput, InputProps>((props, ref) => {
+	const { label, error, errorMessage, ...rest } = props
 
 	const behavior = Platform.OS === 'ios' ? 'padding' : 'height'
 
@@ -34,17 +29,17 @@ export const InputField = (props: InputProps) => {
 				>
 					<TextInput
 						className="placeholder:text-gray font-SFProText text-dark rounded-lg flex-1 text-left p-2"
-						secureTextEntry={secureTextEntry}
+						ref={ref}
 						{...rest}
 					/>
 				</View>
 
 				{errorMessage && (
-					<Text className="text-sm text-default font-SFProText">
+					<Text className="text-sm text-default font-SFProText mt-2">
 						{errorMessage}
 					</Text>
 				)}
 			</View>
 		</KeyboardAvoidingView>
 	)
-}
+})

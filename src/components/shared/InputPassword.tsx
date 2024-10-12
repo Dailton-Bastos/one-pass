@@ -1,5 +1,5 @@
 import type { InputProps } from '@/types'
-import React from 'react'
+import React, { forwardRef } from 'react'
 import {
 	KeyboardAvoidingView,
 	Platform,
@@ -12,10 +12,10 @@ import { twMerge } from 'tailwind-merge'
 import { EyeClose } from '../icons/EyeClose'
 import { EyeOpen } from '../icons/EyeOpen'
 
-export const InputPassword = (props: InputProps) => {
+export const InputPassword = forwardRef<TextInput, InputProps>((props, ref) => {
 	const [isSecureTextEntry, setIsSecureTextEntry] = React.useState(true)
 
-	const { label, error = false, errorMessage, ...rest } = props
+	const { label, error, errorMessage, ...rest } = props
 
 	const behavior = Platform.OS === 'ios' ? 'padding' : 'height'
 
@@ -37,6 +37,7 @@ export const InputPassword = (props: InputProps) => {
 					<TextInput
 						className="placeholder:text-gray font-SFProText text-dark rounded-lg flex-1 text-left p-2"
 						secureTextEntry={isSecureTextEntry}
+						ref={ref}
 						{...rest}
 					/>
 
@@ -49,11 +50,11 @@ export const InputPassword = (props: InputProps) => {
 				</View>
 
 				{errorMessage && (
-					<Text className="text-sm text-default font-SFProText">
+					<Text className="text-sm text-default font-SFProText mt-2">
 						{errorMessage}
 					</Text>
 				)}
 			</View>
 		</KeyboardAvoidingView>
 	)
-}
+})
