@@ -12,6 +12,10 @@ const Welcome = () => {
 		router.replace('/(auth)/sign-up')
 	}, [])
 
+	const handleGoToSignIn = React.useCallback(() => {
+		router.replace('/(auth)/sign-in')
+	}, [])
+
 	const renderPagination = (index: number, total: number) => {
 		const itemsArray = Array.from({ length: total }, (_, index) => index + 1)
 
@@ -71,7 +75,12 @@ const Welcome = () => {
 					className="flex-1"
 					onPress={handleGoToSignUp}
 				/>
-				<Button title="Login" variant="primary" className="flex-1" />
+				<Button
+					title="Login"
+					variant="primary"
+					className="flex-1"
+					onPress={handleGoToSignIn}
+				/>
 			</View>
 		</SafeAreaView>
 	)
