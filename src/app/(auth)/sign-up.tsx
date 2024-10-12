@@ -2,16 +2,25 @@ import { Button } from '@/components/shared/Button'
 import { InputField } from '@/components/shared/InputField'
 import { InputPassword } from '@/components/shared/InputPassword'
 import { Logo } from '@/components/shared/Logo'
+import { supabase } from '@/lib/supabase'
 import { schema } from '@/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from 'expo-router'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native'
+import {
+	Alert,
+	Keyboard,
+	Text,
+	TouchableWithoutFeedback,
+	View,
+} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import type * as z from 'zod'
 
 const SignUp = () => {
+	const [isPending, startTransition] = React.useTransition()
+
 	const { handleSubmit, control, formState } = useForm<
 		z.infer<typeof schema.signUp>
 	>({
@@ -29,7 +38,18 @@ const SignUp = () => {
 
 	const onSubmit = React.useCallback(
 		(fields: z.infer<typeof schema.signUp>) => {
-			return fields
+			startTransition(() => {
+				supabase.auth
+					.signUp({
+						email: fields.email,
+						password: fields.password,
+					})
+					.then(({ error }) => {
+						// TODO check user email verification
+
+						if (error) Alert.alert(error?.message)
+					})
+			})
 		},
 		[],
 	)
@@ -57,6 +77,7 @@ const SignUp = () => {
 							<InputField
 								label="Name"
 								placeholder="John Doe"
+								readOnly={isPending}
 								error={!!errors?.name}
 								errorMessage={errors?.name?.message}
 								onChangeText={onChange}
@@ -72,6 +93,7 @@ const SignUp = () => {
 							<InputField
 								label="Email"
 								placeholder="johndoe@email.com"
+								readOnly={isPending}
 								error={!!errors?.email}
 								errorMessage={errors?.email?.message}
 								onChangeText={onChange}
@@ -87,6 +109,7 @@ const SignUp = () => {
 							<InputPassword
 								label="Password"
 								placeholder="Password"
+								readOnly={isPending}
 								error={!!errors?.password}
 								errorMessage={errors?.password?.message}
 								onChangeText={onChange}
@@ -98,6 +121,7 @@ const SignUp = () => {
 					<Button
 						title="Register"
 						variant="primary"
+						disabled={isPending}
 						onPress={handleSubmit(onSubmit)}
 					/>
 
