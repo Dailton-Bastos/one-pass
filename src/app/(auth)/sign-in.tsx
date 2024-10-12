@@ -29,7 +29,7 @@ const SignIn = () => {
 
 					<View className="w-full flex items-center justify-center pb-7">
 						<Link
-							href="/(auth)/sign-up"
+							href="/(auth)/forgot-password"
 							className="font-SFProText text-default"
 						>
 							Forgot Password
