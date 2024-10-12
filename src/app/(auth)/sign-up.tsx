@@ -121,7 +121,9 @@ const SignUp = () => {
 					<Button
 						title="Register"
 						variant="primary"
+						activeOpacity={0.9}
 						disabled={isPending}
+						isLoading={isPending}
 						onPress={handleSubmit(onSubmit)}
 					/>
 

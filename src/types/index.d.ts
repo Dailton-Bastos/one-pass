@@ -4,6 +4,8 @@ export type ButtonProps = {
   title: string
   variant: 'primary' | 'outline'
   className?: string
+  isLoading?: boolean
+  activityIndicatorColor?: string
 } & TouchableOpacityProps
 
 export type InputProps = {

@@ -112,7 +112,9 @@ const SignIn = () => {
 					<Button
 						title="Login"
 						variant="primary"
+						activeOpacity={0.9}
 						disabled={isPending}
+						isLoading={isPending}
 						onPress={handleSubmit(onSubmit)}
 					/>
 

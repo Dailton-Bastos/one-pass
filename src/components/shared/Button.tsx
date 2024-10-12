@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity } from 'react-native'
+import { ActivityIndicator, Text, TouchableOpacity } from 'react-native'
 import { twMerge } from 'tailwind-merge'
 
 import type { ButtonProps } from '@/types'
@@ -6,7 +6,14 @@ import type { ButtonProps } from '@/types'
 type Props = ButtonProps
 
 export const Button = (props: Props) => {
-	const { title, className, variant = 'primary', ...rest } = props
+	const {
+		title,
+		className,
+		variant = 'primary',
+		isLoading = false,
+		activityIndicatorColor = '#fff',
+		...rest
+	} = props
 
 	const getBgVariantStyle = () => {
 		switch (variant) {
@@ -37,20 +44,28 @@ export const Button = (props: Props) => {
 	return (
 		<TouchableOpacity
 			className={twMerge(
-				'flex items-center justify-center h-10 rounded-lg border-2 border-default',
+				'flex flex-row items-center justify-center h-10 rounded-lg border-2 border-default',
 				getBgVariantStyle(),
 				className,
 			)}
 			{...rest}
 		>
-			<Text
-				className={twMerge(
-					'text-base uppercase font-BebasNeue',
-					getTextVariantStyle(),
-				)}
-			>
-				{title}
-			</Text>
+			{isLoading ? (
+				<ActivityIndicator
+					size="small"
+					color={activityIndicatorColor}
+					className="mr-2"
+				/>
+			) : (
+				<Text
+					className={twMerge(
+						'text-base uppercase font-BebasNeue',
+						getTextVariantStyle(),
+					)}
+				>
+					{title}
+				</Text>
+			)}
 		</TouchableOpacity>
 	)
 }
