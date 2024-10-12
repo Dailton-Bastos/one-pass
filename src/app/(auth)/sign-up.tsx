@@ -1,5 +1,6 @@
 import { Button } from '@/components/shared/Button'
 import { InputField } from '@/components/shared/InputField'
+import { InputPassword } from '@/components/shared/InputPassword'
 import { Logo } from '@/components/shared/Logo'
 import { Link } from 'expo-router'
 import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native'
@@ -23,8 +24,11 @@ const SignUp = () => {
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss} className="flex-1">
 				<View className="w-full py-12">
 					<InputField label="Name" placeholder="John Doe" />
+
 					<InputField label="Email" placeholder="johndoe@email.com" />
-					<InputField label="Password" placeholder="Password" secureTextEntry />
+
+					<InputPassword label="Password" placeholder="Password" />
+
 					<Button title="Register" variant="primary" />
 
 					<View className="w-full flex items-center justify-center pt-12">
