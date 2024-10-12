@@ -2,16 +2,25 @@ import { Button } from '@/components/shared/Button'
 import { InputField } from '@/components/shared/InputField'
 import { InputPassword } from '@/components/shared/InputPassword'
 import { Logo } from '@/components/shared/Logo'
+import { supabase } from '@/lib/supabase'
 import { schema } from '@/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from 'expo-router'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native'
+import {
+	Alert,
+	Keyboard,
+	Text,
+	TouchableWithoutFeedback,
+	View,
+} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import type * as z from 'zod'
 
 const SignIn = () => {
+	const [isPending, startTransition] = React.useTransition()
+
 	const { handleSubmit, control, formState } = useForm<
 		z.infer<typeof schema.signIn>
 	>({
@@ -28,7 +37,17 @@ const SignIn = () => {
 
 	const onSubmit = React.useCallback(
 		(fields: z.infer<typeof schema.signIn>) => {
-			return fields
+			startTransition(() => {
+				supabase.auth
+					.signInWithPassword({
+						email: fields.email,
+						password: fields.password,
+					})
+					.then(({ error }) => {
+						if (error) Alert.alert(error?.message)
+						// TODO redirect after login
+					})
+			})
 		},
 		[],
 	)
@@ -56,6 +75,7 @@ const SignIn = () => {
 							<InputField
 								label="Email"
 								placeholder="johndoe@email.com"
+								readOnly={isPending}
 								error={!!errors?.email}
 								errorMessage={errors?.email?.message}
 								onChangeText={onChange}
@@ -71,6 +91,7 @@ const SignIn = () => {
 							<InputPassword
 								label="Password"
 								placeholder="Password"
+								readOnly={isPending}
 								error={!!errors?.password}
 								errorMessage={errors?.password?.message}
 								onChangeText={onChange}
@@ -91,6 +112,7 @@ const SignIn = () => {
 					<Button
 						title="Login"
 						variant="primary"
+						disabled={isPending}
 						onPress={handleSubmit(onSubmit)}
 					/>
 
