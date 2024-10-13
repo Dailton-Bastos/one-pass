@@ -5,7 +5,7 @@ import { Logo } from '@/components/shared/Logo'
 import { supabase } from '@/lib/supabase'
 import { schema } from '@/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Link } from 'expo-router'
+import { Link, router } from 'expo-router'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import {
@@ -43,9 +43,10 @@ const SignIn = () => {
 						email: fields.email,
 						password: fields.password,
 					})
-					.then(({ error }) => {
+					.then(({ error, data }) => {
 						if (error) Alert.alert(error?.message)
-						// TODO redirect after login
+
+						if (data?.session) return router.replace('/(profile)')
 					})
 			})
 		},

@@ -1,4 +1,5 @@
 import type { TouchableOpacityProps, TextInputProps } from "react-native";
+import type { Session } from "@supabase/supabase-js";
 
 export type ButtonProps = {
   title: string
@@ -15,3 +16,8 @@ export type InputProps = {
   errorMessage?: string
   className?: string
 } & TextInputProps
+
+export type AuthContextData = {
+  session: Session | null
+  isLoading
+}

@@ -1,6 +1,13 @@
-import { Stack } from 'expo-router'
+import { useSession } from '@/hooks/useSession'
+import { Redirect, Stack } from 'expo-router'
 
 const Layout = () => {
+	const { session } = useSession()
+
+	if (session?.user) {
+		return <Redirect href="/(profile)" />
+	}
+
 	return (
 		<Stack>
 			<Stack.Screen name="welcome" options={{ headerShown: false }} />
