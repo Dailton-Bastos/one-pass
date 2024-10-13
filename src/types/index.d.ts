@@ -20,4 +20,5 @@ export type InputProps = {
 export type AuthContextData = {
   session: Session | null
   isLoading
+  signOut: () => void
 }

@@ -1,9 +1,10 @@
 import { supabase } from '@/lib/supabase'
 import React from 'react'
-import { AppState } from 'react-native'
+import { Alert, AppState } from 'react-native'
 import { AuthContext } from './AuthContext'
 
 import type { Session } from '@supabase/supabase-js'
+import { router } from 'expo-router'
 import type { PropsWithChildren } from 'react'
 
 // Tells Supabase Auth to continuously refresh the session automatically if
@@ -19,6 +20,18 @@ AppState.addEventListener('change', (state) => {
 export const SessionProvider = ({ children }: PropsWithChildren) => {
 	const [session, setSession] = React.useState<Session | null>(null)
 	const [isLoading, setIsLoading] = React.useState(false)
+
+	const signOut = React.useCallback(async () => {
+		const { error } = await supabase.auth.signOut()
+
+		if (error) {
+			Alert.alert(error.message)
+
+			return
+		}
+
+		router.push('/(auth)/sign-in')
+	}, [])
 
 	React.useEffect(() => {
 		setIsLoading(true)
@@ -41,8 +54,9 @@ export const SessionProvider = ({ children }: PropsWithChildren) => {
 		() => ({
 			session,
 			isLoading,
+			signOut,
 		}),
-		[session, isLoading],
+		[session, isLoading, signOut],
 	)
 
 	return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>
