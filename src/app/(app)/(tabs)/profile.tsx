@@ -6,7 +6,7 @@ const Profile = () => {
 	const { session, signOut } = useSession()
 
 	return (
-		<SafeAreaView>
+		<SafeAreaView className="flex flex-1 bg-white">
 			<Text>Profile - {session?.user?.email}</Text>
 
 			<TouchableWithoutFeedback onPress={signOut}>

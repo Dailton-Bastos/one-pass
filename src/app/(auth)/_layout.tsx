@@ -5,7 +5,7 @@ const Layout = () => {
 	const { session } = useSession()
 
 	if (session?.user) {
-		return <Redirect href="/(profile)" />
+		return <Redirect href="/(app)/(tabs)" />
 	}
 
 	return (
