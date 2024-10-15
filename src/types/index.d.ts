@@ -26,3 +26,9 @@ export type AuthContextData = {
 export type SearchProps = {
   isLoading?: boolean
 } & TextInputProps
+
+export type NotFoundProps = {
+  showLinkHome?: boolean
+  title?: string
+  description?: string
+}
