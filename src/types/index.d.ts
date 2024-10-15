@@ -22,3 +22,7 @@ export type AuthContextData = {
   isLoading
   signOut: () => void
 }
+
+export type SearchProps = {
+  isLoading?: boolean
+} & TextInputProps
