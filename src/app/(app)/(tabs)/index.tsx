@@ -2,7 +2,14 @@ import { PasswordInfo } from '@/components/home/PasswordInfo'
 import { Search } from '@/components/home/Search'
 import { Logo } from '@/components/shared/Logo'
 import { NotFound } from '@/components/shared/NotFound'
-import { Keyboard, TouchableWithoutFeedback, View } from 'react-native'
+import { PasswordCard } from '@/components/shared/PasswordCard'
+import { passwordsList } from '@/constants'
+import {
+	FlatList,
+	Keyboard,
+	TouchableWithoutFeedback,
+	View,
+} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 const Home = () => {
@@ -19,10 +26,22 @@ const Home = () => {
 					<Search placeholder="Search Websites..." />
 				</View>
 
-				<View className="w-full pt-12">
-					<NotFound
-						title="No Results"
-						description="We couldn’t find anything. Try searching for something else."
+				<View className="w-full pb-6 flex-1">
+					<FlatList
+						data={passwordsList}
+						renderItem={({ item }) => <PasswordCard passwordCard={item} />}
+						keyboardShouldPersistTaps="handled"
+						contentContainerStyle={{
+							paddingBottom: 80,
+						}}
+						ListEmptyComponent={() => (
+							<View className="w-full pt-12">
+								<NotFound
+									title="No Passwords"
+									description="Your password list is empty."
+								/>
+							</View>
+						)}
 					/>
 				</View>
 			</SafeAreaView>

@@ -2,6 +2,7 @@ import Logo from '@/assets/images/Logo.svg'
 import Onboarding1 from '@/assets/images/Onboarding1.svg'
 import Onboarding2 from '@/assets/images/Onboarding2.svg'
 import Onboarding3 from '@/assets/images/Onboarding3.svg'
+import companyLogo from '@/assets/images/password-card.png'
 
 export const icons = {
 	Logo,
@@ -11,6 +12,7 @@ export const images = {
 	Onboarding1,
 	Onboarding2,
 	Onboarding3,
+	companyLogo,
 }
 
 export const onboarding = [
@@ -34,5 +36,32 @@ export const onboarding = [
 		description:
 			'Don’t compromise your passwords by typing them in public, let OnePass autofill those and keep your credentials secure.',
 		Onboarding: images.Onboarding3,
+	},
+]
+
+export const passwordsList = [
+	{
+		logo: images.companyLogo,
+		title: 'Facebook',
+	},
+	{
+		logo: images.companyLogo,
+		title: 'Amazon',
+	},
+	{
+		logo: images.companyLogo,
+		title: 'Apple',
+	},
+	{
+		logo: images.companyLogo,
+		title: 'Netflix',
+	},
+	{
+		logo: images.companyLogo,
+		title: 'Instagram',
+	},
+	{
+		logo: images.companyLogo,
+		title: 'Google',
 	},
 ]

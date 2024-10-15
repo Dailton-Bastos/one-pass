@@ -1,4 +1,4 @@
-import type { TouchableOpacityProps, TextInputProps } from "react-native";
+import type { TouchableOpacityProps, TextInputProps, ImageSourcePropType } from "react-native";
 import type { Session } from "@supabase/supabase-js";
 
 export type ButtonProps = {
@@ -31,4 +31,15 @@ export type NotFoundProps = {
   showLinkHome?: boolean
   title?: string
   description?: string
+}
+
+export type CopyToClipboardProps = {
+  handleClickCopy: () => void
+}
+
+export type PasswordCardProps = {
+  passwordCard: {
+    logo: ImageSourcePropType
+    title: string
+  }
 }
