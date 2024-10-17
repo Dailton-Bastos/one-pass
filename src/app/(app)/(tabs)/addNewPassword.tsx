@@ -1,11 +1,8 @@
-import { Text, View } from 'react-native'
+import { Redirect } from 'expo-router'
+import {} from 'react-native'
 
 const AddNewPassword = () => {
-	return (
-		<View>
-			<Text>Add new password screen</Text>
-		</View>
-	)
+	return <Redirect href="/(app)/new-password" />
 }
 
 export default AddNewPassword

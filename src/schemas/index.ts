@@ -21,4 +21,16 @@ export const schema = {
 			message: 'Password required',
 		}),
 	}),
+
+	addPassword: z.object({
+		name: z.string().trim().min(1, {
+			message: 'Name is required',
+		}),
+		url: z.union([z.literal(''), z.string().url()]),
+		email: z.union([z.literal(''), z.string().email()]),
+		username: z.optional(z.string().trim()),
+		password: z.string().min(1, {
+			message: 'Password is required',
+		}),
+	}),
 }

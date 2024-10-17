@@ -1,5 +1,6 @@
 import type { TouchableOpacityProps, TextInputProps, ImageSourcePropType } from "react-native";
 import type { Session } from "@supabase/supabase-js";
+import { Href, RouteParams, Router } from "expo-router";
 
 export type ButtonProps = {
   title: string
@@ -42,4 +43,8 @@ export type PasswordCardProps = {
     logo: ImageSourcePropType
     title: string
   }
+}
+
+export type BackButtonProps = {
+  backLink: Href<string | object>
 }

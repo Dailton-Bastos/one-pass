@@ -26,7 +26,7 @@ const Home = () => {
 					<Search placeholder="Search Websites..." />
 				</View>
 
-				<View className="w-full pb-6 flex-1">
+				<View className="w-full pb-6 flex-1 bg-white">
 					<FlatList
 						data={passwordsList}
 						renderItem={({ item }) => <PasswordCard passwordCard={item} />}
