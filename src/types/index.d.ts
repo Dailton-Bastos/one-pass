@@ -63,3 +63,11 @@ export type PasswordStrengthProps = {
   type?: PasswordStrengthType
   className?: string
 }
+
+export type GeneratePasswordParams = {
+  includeUppercase: boolean,
+  includeLowercase: boolean,
+  includeNumbers: boolean,
+  includeSymbols: boolean,
+  length: number,
+}

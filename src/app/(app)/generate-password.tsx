@@ -2,6 +2,7 @@ import { BackButton } from '@/components/shared/BackButton'
 import { Button } from '@/components/shared/Button'
 import { InputField } from '@/components/shared/InputField'
 import { PasswordStrength } from '@/components/shared/PasswordStrength'
+import { generatePassword } from '@/utils'
 import Slider from '@react-native-community/slider'
 import React from 'react'
 import { Text, View } from 'react-native'
@@ -20,6 +21,18 @@ const GeneratePassword = () => {
 		symbols: true,
 		length: 12,
 	})
+
+	const randomGeneratePassword = React.useCallback(() => {
+		const password = generatePassword({
+			length: passwordOptions.length,
+			includeUppercase: passwordOptions.uppercase,
+			includeLowercase: passwordOptions.lowercase,
+			includeNumbers: passwordOptions.numbers,
+			includeSymbols: passwordOptions.symbols,
+		})
+
+		setPassword(password)
+	}, [passwordOptions])
 
 	return (
 		<SafeAreaView className="w-full h-full px-5 pt-4 bg-white">
@@ -144,7 +157,7 @@ const GeneratePassword = () => {
 					title="Generate"
 					variant="outline"
 					className="flex-1"
-					onPress={() => setPassword('12345678')}
+					onPress={randomGeneratePassword}
 				/>
 				<Button title="Copy" variant="primary" className="flex-1" />
 			</View>

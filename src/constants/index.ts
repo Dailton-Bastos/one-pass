@@ -65,3 +65,8 @@ export const passwordsList = [
 		title: 'Google',
 	},
 ]
+
+export const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz'
+export const uppercaseChars = lowercaseChars.toUpperCase()
+export const numbers = '0123456789'
+export const symbols = '!@#$%&*_+-=?~'
