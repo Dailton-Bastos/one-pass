@@ -28,6 +28,7 @@ const NewPassword = () => {
 			password: '',
 			name: '',
 			url: '',
+			email: '',
 		},
 	})
 
