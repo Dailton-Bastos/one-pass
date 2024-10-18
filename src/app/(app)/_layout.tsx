@@ -5,6 +5,7 @@ const Layout = () => {
 		<Stack>
 			<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 			<Stack.Screen name="new-password" options={{ headerShown: false }} />
+			<Stack.Screen name="generate-password" options={{ headerShown: false }} />
 		</Stack>
 	)
 }

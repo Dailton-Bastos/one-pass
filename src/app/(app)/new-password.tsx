@@ -4,6 +4,7 @@ import { InputField } from '@/components/shared/InputField'
 import { InputPassword } from '@/components/shared/InputPassword'
 import { schema } from '@/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { router } from 'expo-router'
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import {
@@ -140,6 +141,7 @@ const NewPassword = () => {
 								title="Generate new"
 								variant="outline"
 								className="max-w-[157px] w-full"
+								onPress={() => router.replace('/generate-password')}
 								// disabled={isPending}
 								// isLoading={isPending}
 								// onPress={handleSubmit(onSubmit)}

@@ -61,4 +61,5 @@ export type PasswordStrengthProps = {
   showLabel?: boolean
   value: string
   type?: PasswordStrengthType
+  className?: string
 }

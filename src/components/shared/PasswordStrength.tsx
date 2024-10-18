@@ -2,12 +2,13 @@ import type { PasswordStrengthProps } from '@/types'
 import { checkPasswordStrength } from '@/utils'
 import React from 'react'
 import { Text, View } from 'react-native'
-import { twJoin } from 'tailwind-merge'
+import { twJoin, twMerge } from 'tailwind-merge'
 
 export const PasswordStrength = ({
 	showLabel,
 	value,
 	type = 'solid',
+	className,
 }: PasswordStrengthProps) => {
 	const strength = checkPasswordStrength(value)
 
@@ -16,7 +17,9 @@ export const PasswordStrength = ({
 	}, [strength])
 
 	return (
-		<View className="flex flex-row items-center justify-start">
+		<View
+			className={twMerge('flex flex-row items-center justify-start', className)}
+		>
 			{showLabel && (
 				<Text className="text-gray font-SFProText text-sm mr-2">
 					Password strength
