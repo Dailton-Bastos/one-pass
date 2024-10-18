@@ -124,11 +124,12 @@ const NewPassword = () => {
 								<InputPassword
 									label="Password"
 									placeholder="Password"
-									readOnly
+									// readOnly
 									error={!!errors?.password}
 									errorMessage={errors?.password?.message}
 									onChangeText={onChange}
 									value={value}
+									showPasswordStrength={!!value}
 								/>
 							)}
 						/>

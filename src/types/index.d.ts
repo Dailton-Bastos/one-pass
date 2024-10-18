@@ -2,6 +2,8 @@ import type { TouchableOpacityProps, TextInputProps, ImageSourcePropType } from 
 import type { Session } from "@supabase/supabase-js";
 import { Href, RouteParams, Router } from "expo-router";
 
+type PasswordStrengthType = 'solid' | 'dashed'
+
 export type ButtonProps = {
   title: string
   variant: 'primary' | 'outline'
@@ -17,6 +19,12 @@ export type InputProps = {
   errorMessage?: string
   className?: string
 } & TextInputProps
+
+export type InputPasswordProps = {
+  showPasswordStrength?: boolean
+  showPasswordStrengthLabel?: boolean
+  passwordStrengthType?: PasswordStrengthType
+} & InputProps
 
 export type AuthContextData = {
   session: Session | null
@@ -47,4 +55,10 @@ export type PasswordCardProps = {
 
 export type BackButtonProps = {
   backLink: Href<string | object>
+}
+
+export type PasswordStrengthProps = {
+  showLabel?: boolean
+  value: string
+  type?: PasswordStrengthType
 }

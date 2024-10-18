@@ -1,4 +1,4 @@
-import type { InputProps } from '@/types'
+import type { InputPasswordProps } from '@/types'
 import React, { forwardRef } from 'react'
 import {
 	KeyboardAvoidingView,
@@ -11,50 +11,72 @@ import {
 import { twMerge } from 'tailwind-merge'
 import { EyeClose } from '../icons/EyeClose'
 import { EyeOpen } from '../icons/EyeOpen'
+import { PasswordStrength } from './PasswordStrength'
 
-export const InputPassword = forwardRef<TextInput, InputProps>((props, ref) => {
-	const [isSecureTextEntry, setIsSecureTextEntry] = React.useState(true)
+export const InputPassword = forwardRef<TextInput, InputPasswordProps>(
+	(props, ref) => {
+		const [isSecureTextEntry, setIsSecureTextEntry] = React.useState(true)
 
-	const { label, error, errorMessage, ...rest } = props
+		const {
+			label,
+			error,
+			errorMessage,
+			showPasswordStrength = true,
+			showPasswordStrengthLabel = true,
+			passwordStrengthType = 'dashed',
+			value,
+			...rest
+		} = props
 
-	const behavior = Platform.OS === 'ios' ? 'padding' : 'height'
+		const behavior = Platform.OS === 'ios' ? 'padding' : 'height'
 
-	const onPress = () => setIsSecureTextEntry((prev) => !prev)
+		const onPress = () => setIsSecureTextEntry((prev) => !prev)
 
-	return (
-		<KeyboardAvoidingView behavior={behavior}>
-			<View className="w-full pb-5">
-				{label && (
-					<Text className="font-BebasNeue text-dark text-xs">{label}</Text>
-				)}
-
-				<View
-					className={twMerge(
-						'flex flex-row justify-start items-center border-2 rounded-lg mt-0.5 relative',
-						error ? 'border-default' : 'border-input',
+		return (
+			<KeyboardAvoidingView behavior={behavior}>
+				<View className="w-full pb-5">
+					{label && (
+						<Text className="font-BebasNeue text-dark text-xs">{label}</Text>
 					)}
-				>
-					<TextInput
-						className="placeholder:text-gray font-SFProText text-dark rounded-lg flex-1 text-left p-2"
-						secureTextEntry={isSecureTextEntry}
-						ref={ref}
-						{...rest}
-					/>
 
-					<TouchableOpacity
-						className="flex items-center justify-center w-6 h-6 mr-2"
-						onPress={onPress}
+					<View
+						className={twMerge(
+							'flex flex-row justify-start items-center border-2 rounded-lg mt-0.5 relative',
+							error ? 'border-default' : 'border-input',
+						)}
 					>
-						{isSecureTextEntry ? <EyeOpen /> : <EyeClose />}
-					</TouchableOpacity>
-				</View>
+						<TextInput
+							className="placeholder:text-gray font-SFProText text-dark rounded-lg flex-1 text-left p-2"
+							secureTextEntry={isSecureTextEntry}
+							ref={ref}
+							{...rest}
+						/>
 
-				{errorMessage && (
-					<Text className="text-sm text-default font-SFProText mt-2">
-						{errorMessage}
-					</Text>
-				)}
-			</View>
-		</KeyboardAvoidingView>
-	)
-})
+						<TouchableOpacity
+							className="flex items-center justify-center w-6 h-6 mr-2"
+							onPress={onPress}
+						>
+							{isSecureTextEntry ? <EyeOpen /> : <EyeClose />}
+						</TouchableOpacity>
+					</View>
+
+					{errorMessage && (
+						<Text className="text-sm text-default font-SFProText mt-2">
+							{errorMessage}
+						</Text>
+					)}
+
+					{showPasswordStrength && (
+						<View className="py-2">
+							<PasswordStrength
+								showLabel={showPasswordStrengthLabel}
+								value={value ?? ''}
+								type={passwordStrengthType}
+							/>
+						</View>
+					)}
+				</View>
+			</KeyboardAvoidingView>
+		)
+	},
+)
