@@ -11,6 +11,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 const GeneratePassword = () => {
 	const [password, setPassword] = React.useState('')
+	const [error, setError] = React.useState<boolean | null>(null)
 
 	const [passwordOptions, setPasswordOptions] = React.useState({
 		minimumValue: 1,
@@ -23,15 +24,32 @@ const GeneratePassword = () => {
 	})
 
 	const randomGeneratePassword = React.useCallback(() => {
+		const { length, uppercase, lowercase, numbers, symbols } = passwordOptions
+
+		const hasOneOrMoreCharacterSet = Object.values({
+			uppercase,
+			lowercase,
+			numbers,
+			symbols,
+		}).some((char) => char)
+
+		if (!hasOneOrMoreCharacterSet) {
+			setError(true)
+			setPassword('')
+
+			return
+		}
+
 		const password = generatePassword({
-			length: passwordOptions.length,
-			includeUppercase: passwordOptions.uppercase,
-			includeLowercase: passwordOptions.lowercase,
-			includeNumbers: passwordOptions.numbers,
-			includeSymbols: passwordOptions.symbols,
+			length,
+			includeUppercase: uppercase,
+			includeLowercase: lowercase,
+			includeNumbers: numbers,
+			includeSymbols: symbols,
 		})
 
 		setPassword(password)
+		setError(null)
 	}, [passwordOptions])
 
 	return (
@@ -152,6 +170,12 @@ const GeneratePassword = () => {
 				</View>
 			</View>
 
+			{error && (
+				<Text className="text-center text-default text-sm font-SFProText mt-4">
+					Must pass one or more character sets
+				</Text>
+			)}
+
 			<View className="w-full flex flex-row gap-x-4 py-8">
 				<Button
 					title="Generate"
@@ -159,7 +183,12 @@ const GeneratePassword = () => {
 					className="flex-1"
 					onPress={randomGeneratePassword}
 				/>
-				<Button title="Copy" variant="primary" className="flex-1" />
+				<Button
+					title="Copy"
+					variant="primary"
+					className="flex-1"
+					disabled={!password}
+				/>
 			</View>
 		</SafeAreaView>
 	)
