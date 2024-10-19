@@ -2,15 +2,17 @@ import { BackButton } from '@/components/shared/BackButton'
 import { Button } from '@/components/shared/Button'
 import { InputField } from '@/components/shared/InputField'
 import { PasswordStrength } from '@/components/shared/PasswordStrength'
+import { useCopyToClipboard } from '@/hooks/useCopyToClipboard'
 import { generatePassword } from '@/utils'
 import Slider from '@react-native-community/slider'
 import React from 'react'
-import { Text, View } from 'react-native'
+import { Alert, Text, View } from 'react-native'
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 const GeneratePassword = () => {
 	const [password, setPassword] = React.useState('')
+
 	const [error, setError] = React.useState<boolean | null>(null)
 
 	const [passwordOptions, setPasswordOptions] = React.useState({
@@ -22,6 +24,10 @@ const GeneratePassword = () => {
 		symbols: true,
 		length: 12,
 	})
+
+	const { result, copyToClipboard } = useCopyToClipboard()
+
+	const copyButtonTitle = result?.state === 'success' ? 'Copied' : 'Copy'
 
 	const randomGeneratePassword = React.useCallback(() => {
 		const { length, uppercase, lowercase, numbers, symbols } = passwordOptions
@@ -51,6 +57,12 @@ const GeneratePassword = () => {
 		setPassword(password)
 		setError(null)
 	}, [passwordOptions])
+
+	React.useEffect(() => {
+		if (result?.state === 'error') {
+			Alert.alert(result.message)
+		}
+	}, [result])
 
 	return (
 		<SafeAreaView className="w-full h-full px-5 pt-4 bg-white">
@@ -184,10 +196,12 @@ const GeneratePassword = () => {
 					onPress={randomGeneratePassword}
 				/>
 				<Button
-					title="Copy"
+					title={copyButtonTitle}
 					variant="primary"
 					className="flex-1"
 					disabled={!password}
+					activeOpacity={0.8}
+					onPress={() => copyToClipboard(password)}
 				/>
 			</View>
 		</SafeAreaView>

@@ -71,3 +71,5 @@ export type GeneratePasswordParams = {
   includeSymbols: boolean,
   length: number,
 }
+
+export type CopyToClipboardResult = null | { state: 'success' } | { state: 'error'; message: string };
